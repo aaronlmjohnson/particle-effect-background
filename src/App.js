@@ -1,10 +1,13 @@
 import './App.css';
-import Pixel from "./components/Pixel";
+import Pixel from "./components/Pixel/Pixel";
+import Pixels from './components/Pixels/Pixels';
 
 function App() {
+  
   return (
     <div className="App">
-      <Pixel x={10} y={10} />
+      <Pixels />
+      
     </div>
   );
 }
