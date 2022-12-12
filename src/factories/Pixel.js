@@ -1,6 +1,8 @@
 export const Pixel = (x, y, hex, ctx)=>{
     let _posX = x; 
     let _posY = y;
+    let directionX = Math.random() < .49 ? -1 : 1;
+    let directionY = Math.random() < .49 ? -1 : 1;
     let _hex = hex;
 
     const render = (hex="")=>{
@@ -17,8 +19,8 @@ export const Pixel = (x, y, hex, ctx)=>{
     }
 
     const move = (x, y)=>{
-        _posX += x;
-        _posY += y;
+        _posX += directionX * x;
+        _posY += directionY * y;
     }
 
     render(x, y);
