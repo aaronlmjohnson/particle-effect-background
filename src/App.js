@@ -9,7 +9,7 @@ function App() {
   useEffect(()=>{
     const pixelCanvas = document.getElementById("pixel-canvas");
     const ctx = pixelCanvas.getContext("2d");
-    const pixels = Pixels(5, pixelCanvas, ctx);
+    const pixels = Pixels(100, pixelCanvas, ctx);
     
     setInterval(()=>{
       

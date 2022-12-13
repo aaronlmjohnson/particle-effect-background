@@ -1,9 +1,10 @@
 export const Pixel = (x, y, hex, ctx, canvas)=>{
     let _posX = x; 
     let _posY = y;
-    let _canvas = canvas;
+    const _canvas = canvas;
     let directionX = Math.random() < .49 ? -1 : 1;
     let directionY = Math.random() < .49 ? -1 : 1;
+    const speed = (Math.random()* .1) + .1;
     let _hex = hex;
 
     const render = (hex="")=>{
@@ -20,8 +21,8 @@ export const Pixel = (x, y, hex, ctx, canvas)=>{
     }
 
     const move = (x, y)=>{
-        _posX += directionX * x;
-        _posY += directionY * y;
+        _posX += (directionX * x) * speed;
+        _posY += (directionY * y) * speed;
     }
 
     const isOutOfBounds = ()=> _posX < 0 || _posX > _canvas.width|| _posY < 0 || _posY > _canvas.height; 
