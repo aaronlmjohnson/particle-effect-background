@@ -1,6 +1,7 @@
-export const Pixel = (x, y, hex, ctx)=>{
+export const Pixel = (x, y, hex, ctx, canvas)=>{
     let _posX = x; 
     let _posY = y;
+    let _canvas = canvas;
     let directionX = Math.random() < .49 ? -1 : 1;
     let directionY = Math.random() < .49 ? -1 : 1;
     let _hex = hex;
@@ -23,7 +24,9 @@ export const Pixel = (x, y, hex, ctx)=>{
         _posY += directionY * y;
     }
 
+    const isOutOfBounds = ()=> _posX < 0 || _posX > _canvas.width|| _posY < 0 || _posY > _canvas.height; 
+
     render(x, y);
     
-    return{render, applyColor, move}
+    return{render, applyColor, move, isOutOfBounds}
 }

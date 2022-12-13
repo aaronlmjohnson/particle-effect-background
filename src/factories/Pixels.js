@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Pixel } from "./Pixel";
 
 export const Pixels = (size, canvas, ctx)=>{
@@ -20,16 +21,28 @@ export const Pixels = (size, canvas, ctx)=>{
     }
      
     const _createPixels = ()=>{
-        for(let i = 0; i < size; i++){
-            const vector = _randomVector();
-            _pixels.push(Pixel(vector.magnitude, vector.direction, _randomHex(), ctx));
-        }
+        for(let i = 0; i < size; i++) addPixel();
     }
+
+    const render = ()=>{
+        if(_pixels.length < size) addPixel();
+        filterInboundPixels();
+        _pixels.map((pixel)=>{
+            pixel.move(1, 1);
+            pixel.render();
+        })
+    }
+
+    const addPixel = ()=>{
+        const vector = _randomVector();
+        _pixels.push(Pixel(vector.magnitude, vector.direction, _randomHex(), ctx, canvas));
+    }
+
+    const filterInboundPixels = ()=> _pixels =_pixels.filter((pixel)=> !pixel.isOutOfBounds());
 
     const getPixels = ()=> _pixels;
 
-    
     _createPixels(); 
     
-    return{ getPixels }
+    return{ getPixels, render }
 }
