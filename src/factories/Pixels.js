@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Pixel } from "./Pixel";
 
-export const Pixels = (size, canvas, ctx)=>{
+export const Pixels = (size, canvas, ctx, cursor)=>{
     
     let _pixels = [];
     const _randomHex = ()=>{

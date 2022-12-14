@@ -6,11 +6,13 @@ export const Pixel = (x, y, hex, ctx, canvas)=>{
     let directionY = Math.random() < .49 ? -1 : 1;
     const speed = (Math.random()* .1) + .1;
     let _hex = hex;
+    const _boundryRadius = 40;
 
     const render = (hex="")=>{
         ctx.beginPath();
         ctx.arc(_posX, _posY, 1.5, 0, 2 * Math.PI);
         applyColor(_hex);
+        _renderBoundry();
     }
 
     const applyColor = (hex)=>{
@@ -18,6 +20,17 @@ export const Pixel = (x, y, hex, ctx, canvas)=>{
         ctx.fill();
         ctx.strokeStyle= hex;
         ctx.stroke();
+    }
+
+    const _renderBoundry = ()=>{
+        ctx.beginPath();
+        ctx.arc(_posX, _posY, _boundryRadius, 0, 2 * Math.PI);
+        ctx.stroke();
+        
+    }
+
+    const isCursourInbounds = ()=>{
+        
     }
 
     const move = (x, y)=>{
