@@ -29,8 +29,8 @@ export const Pixel = (x, y, hex, ctx, canvas)=>{
         
     }
 
-    const isCursourInbounds = ()=>{
-        
+    const isCursourInbounds = (cursor)=>{
+        console.log(cursor);
     }
 
     const move = (x, y)=>{

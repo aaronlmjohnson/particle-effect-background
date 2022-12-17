@@ -42,7 +42,9 @@ export const Pixels = (size, canvas, ctx, cursor)=>{
 
     const getPixels = ()=> _pixels;
 
+    const getCursor = (cursor)=> cursor;
+
     _createPixels(); 
     
-    return{ getPixels, render }
+    return{ getPixels, render, getCursor }
 }

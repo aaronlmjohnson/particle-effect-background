@@ -1,14 +1,8 @@
-import { useEffect } from "react";
 
-const PixelCanvas = ({getMousePos})=>{
-    useEffect(()=>{
-        const canvas = document.getElementById("pixel-canvas");
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    }, []);
-    
+const PixelCanvas = ({canvasRef})=>{  
+   
     return (
-        <canvas id="pixel-canvas" onPointerMove={(e)=> getMousePos(document.getElementById("pixel-canvas"), e)}>
+        <canvas id="pixel-canvas" ref={canvasRef}>
         </canvas>
     );
 };
