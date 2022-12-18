@@ -1,28 +1,28 @@
-export const Pixel = (x, y, hex, ctx, canvas)=>{
+export const Pixel = (x, y, canvasWidth, canvasHeight, hex)=>{
     let _posX = x; 
     let _posY = y;
-    const _canvas = canvas;
     let directionX = Math.random() < .49 ? -1 : 1;
     let directionY = Math.random() < .49 ? -1 : 1;
     const speed = (Math.random()* .1) + .1;
     let _hex = hex;
     const _boundryRadius = 40;
 
-    const render = (hex="")=>{
+    const render = (ctx)=>{
+        ctx.fillStyle = _hex;
         ctx.beginPath();
         ctx.arc(_posX, _posY, 1.5, 0, 2 * Math.PI);
-        applyColor(_hex);
-        _renderBoundry();
+        ctx.fill();
+        //_renderBoundry();
     }
 
-    const applyColor = (hex)=>{
+    const applyColor = (hex, ctx)=>{
         ctx.fillStyle = hex;
         ctx.fill();
         ctx.strokeStyle= hex;
         ctx.stroke();
     }
 
-    const _renderBoundry = ()=>{
+    const _renderBoundry = (ctx)=>{
         ctx.beginPath();
         ctx.arc(_posX, _posY, _boundryRadius, 0, 2 * Math.PI);
         ctx.stroke();
@@ -38,9 +38,7 @@ export const Pixel = (x, y, hex, ctx, canvas)=>{
         _posY += (directionY * y) * speed;
     }
 
-    const isOutOfBounds = ()=> _posX < 0 || _posX > _canvas.width|| _posY < 0 || _posY > _canvas.height; 
-
-    render(x, y);
+    const isOutOfBounds = ()=> _posX < 0 || _posX > canvasWidth || _posY < 0 || _posY > canvasHeight; 
     
     return{render, applyColor, move, isOutOfBounds}
 }

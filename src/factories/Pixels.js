@@ -1,9 +1,13 @@
 import { useEffect } from "react";
 import { Pixel } from "./Pixel";
 
-export const Pixels = (size, canvas, ctx, cursor)=>{
+export const Pixels = (size, canvasWidth, canvasHeight)=>{
     
     let _pixels = [];
+    let canvas = null;
+    let ctx = null;
+    let cursor = null;
+
     const _randomHex = ()=>{
         const hexValues = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'];
         let hex = "#";
@@ -15,8 +19,8 @@ export const Pixels = (size, canvas, ctx, cursor)=>{
     }
 
     const _randomVector = ()=>{
-        const magnitude = Math.ceil(Math.random() * canvas.width);
-        const direction = Math.ceil(Math.random() * canvas.height);
+        const magnitude = Math.ceil(Math.random() * canvasWidth);
+        const direction = Math.ceil(Math.random() * canvasHeight);
         return {magnitude, direction};
     }
      
@@ -24,10 +28,10 @@ export const Pixels = (size, canvas, ctx, cursor)=>{
         for(let i = 0; i < size; i++) addPixel();
     }
 
-    const render = ()=>{
+    const render = (ctx)=>{
         if(_pixels.length < size) addPixel();
         filterInboundPixels();
-        _pixels.map((pixel)=>{
+        _pixels.forEach((pixel)=>{
             pixel.move(1, 1);
             pixel.render();
         })
@@ -44,7 +48,7 @@ export const Pixels = (size, canvas, ctx, cursor)=>{
 
     const getCursor = (cursor)=> cursor;
 
-    _createPixels(); 
+    //_createPixels(); 
     
     return{ getPixels, render, getCursor }
 }

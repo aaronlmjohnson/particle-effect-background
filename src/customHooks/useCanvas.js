@@ -1,29 +1,39 @@
 import React, { useEffect, useRef } from 'react';
 
 
-const useCanvas = (draw)=>{
+const useCanvas = (draw, width, height,[...drawables])=>{
     const canvasRef = useRef(null);
-
     useEffect(()=>{
         const canvas = canvasRef.current;
+        canvas.width = width;
+        canvas.height = height;
         const ctx = canvas.getContext('2d'); 
         let animationFrameId;
-        let x = 10;
-        let y = 10;
 
+        const update = ()=>{
+            render();
+
+            drawables.forEach((drawable)=>{
+                drawable.move(1, 1);
+            })
+
+            animationFrameId = window.requestAnimationFrame(update);
+        }
+        
         const render = ()=>{
             ctx.clearRect(0, 0, canvas.height, canvas.width);
-            draw(ctx, x+=1, y+=1, "#00FF00");
 
-            animationFrameId = window.requestAnimationFrame(render);
+            drawables.forEach((drawable)=>{
+                drawable.render(ctx);
+            })
         }
 
-        render();
+        update();
 
         return ()=>{
             window.cancelAnimationFrame(animationFrameId);
         }
-    }, [draw]);
+    }, []);
     
     return canvasRef;
 }
