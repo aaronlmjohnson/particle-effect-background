@@ -5,14 +5,15 @@ export const Pixel = (x, y, canvasWidth, canvasHeight, hex)=>{
     let directionY = Math.random() < .49 ? -1 : 1;
     const speed = (Math.random()* .1) + .1;
     let _hex = hex;
+
     const _boundryRadius = 40;
 
-    const render = (ctx)=>{
+    const render = (ctx, cursor)=>{
         ctx.fillStyle = _hex;
         ctx.beginPath();
         ctx.arc(_posX, _posY, 1.5, 0, 2 * Math.PI);
         ctx.fill();
-        //_renderBoundry();
+        if(isCursorInbounds(cursor))_renderBoundry(ctx);
     }
 
     const applyColor = (hex, ctx)=>{
@@ -29,8 +30,9 @@ export const Pixel = (x, y, canvasWidth, canvasHeight, hex)=>{
         
     }
 
-    const isCursourInbounds = (cursor)=>{
-        console.log(cursor);
+    const isCursorInbounds = (cursor)=>{
+        const d = Math.sqrt(Math.pow(Math.abs((cursor.x - _posX)), 2) + Math.pow(Math.abs((cursor.y - _posY)), 2));
+        if(d <= _boundryRadius ) return true;
     }
 
     const move = (x, y)=>{
