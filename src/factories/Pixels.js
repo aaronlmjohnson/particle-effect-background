@@ -1,12 +1,9 @@
-import { useEffect } from "react";
 import { Pixel } from "./Pixel";
 import Cursor from '../factories/Cursor';
 
 export const Pixels = (size, canvasWidth, canvasHeight)=>{
     
     let _pixels = [];
-    let canvas = null;
-    let ctx = null;
 
     const _randomHex = ()=>{
         const hexValues = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'];
@@ -32,7 +29,16 @@ export const Pixels = (size, canvasWidth, canvasHeight)=>{
         if(_pixels.length < size) addPixel();
         filterInboundPixels();
         _pixels.forEach((pixel)=>{
+            pixel.setNearbyPixels(_isPixelIntersecting(pixel));
+            console.log(pixel.getNearbyPixels());
             pixel.render(ctx, Cursor);
+        })
+    }
+
+    const _isPixelIntersecting = (pixel)=>{
+        const pixelsArr = _pixels.filter(pixel2 => pixel2 !== pixel);
+        return pixelsArr.filter((pixel2)=>{
+            return pixel.isPixelInbounds(pixel2.getX(), pixel2.getY());
         })
     }
 
@@ -50,4 +56,6 @@ export const Pixels = (size, canvasWidth, canvasHeight)=>{
     _createPixels(); 
     
     return{ getPixels, render, move}
+    
 }
+
