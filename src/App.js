@@ -7,7 +7,7 @@ import useCanvas from './customHooks/useCanvas';
 function App() {
   const CANVAS_HEIGHT = window.innerHeight;
   const CANVAS_WIDTH = window.innerWidth;
-  const pixels  = Pixels(50, CANVAS_WIDTH, CANVAS_HEIGHT)
+  const pixels  = Pixels(20, CANVAS_WIDTH, CANVAS_HEIGHT)
   const canvasRef  = useCanvas(CANVAS_WIDTH, CANVAS_HEIGHT, [pixels]);
 
   return (

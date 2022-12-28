@@ -6,7 +6,6 @@ export const Pixel = (x, y, canvasWidth, canvasHeight, hex)=>{
     const speed = (Math.random()* .1) + .1;
     let _hex = hex;
     let _nearbyPixels = [];
-    let _pixelEdges = [];
     const _boundryRadius = 40;
 
     const render = (ctx, cursor)=>{
@@ -43,9 +42,6 @@ export const Pixel = (x, y, canvasWidth, canvasHeight, hex)=>{
 
     const setNearbyPixels = (arr)=> _nearbyPixels = arr;
     const getNearbyPixels = ()=> _nearbyPixels; 
-    
-    const setPixelEdges = ()=> console.log()//=> _nearbyPixels.map((node) => [pixel, node])
-    const getPixelEdges = ()=> _pixelEdges;
 
     const getX = ()=> _posX;
     const getY = ()=> _posY;
@@ -62,8 +58,6 @@ export const Pixel = (x, y, canvasWidth, canvasHeight, hex)=>{
         isPixelInbounds,
         setNearbyPixels,
         getNearbyPixels,
-        setPixelEdges,
-        getPixelEdges
     }
 
 }

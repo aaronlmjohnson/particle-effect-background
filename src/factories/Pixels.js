@@ -60,8 +60,6 @@ export const Pixels = (size, canvasWidth, canvasHeight)=>{
         const nodes = pixel.getNearbyPixels();
         if(nodes.length < 1) return;
         nodes.forEach((node)=>{
-            //*** check and see if edge already exists if so skip this node else do code below */
-            //console.log(nearbyEdges(node));
             if(doesEdgeExist([node, pixel])) return;
             ctx.beginPath();
             ctx.moveTo(pixel.getX(), pixel.getY());
@@ -77,7 +75,7 @@ export const Pixels = (size, canvasWidth, canvasHeight)=>{
         if(a.length !== b.length) return;
         const sortedA = a.sort();
         const sortedB = b.sort();
-        return a.every((val, index) => val === b[index]);
+        return sortedA.every((val, index) => val === sortedB[index]);
     }
 
     const doesEdgeExist = (newEdge) =>{
@@ -93,9 +91,5 @@ export const Pixels = (size, canvasWidth, canvasHeight)=>{
     return{ getPixels, render, move}
 }
 
-/*
-    *******Drawing lines (edges) between pixel nodes*******
-    
-*/
 
 
